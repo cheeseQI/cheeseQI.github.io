@@ -3,6 +3,7 @@ import './App.css';
 
 import langChainImage from './assets/langchain.png';
 import myCatImage from './assets/mycat.jpg';
+import summerImage from './assets/summer.jpg';
 
 const profile = {
   name: 'Cheese Qi',
@@ -82,6 +83,21 @@ const tabs = [
   { key: 'open-source', label: 'Open Source' },
 ];
 
+const cats = [
+  {
+    name: 'Zhazong',
+    image: myCatImage,
+    alt: 'Zhazong the cat relaxing',
+    note: 'My senior code reviewer—calm, fluffy, and surprisingly strict about quality.',
+  },
+  {
+    name: 'Summer',
+    image: summerImage,
+    alt: 'Summer the cat resting',
+    note: 'Raised together with my girlfriend, Summer is our daily dose of joy and cozy vibes.',
+  },
+];
+
 function App() {
   const [activeTab, setActiveTab] = useState('about');
 
@@ -102,8 +118,17 @@ function App() {
           </article>
           <article className="card image-card">
             <h3>Life Snapshot</h3>
-            <img src={myCatImage} alt="My cat" className="cat-image" />
-            <p>This is my cat 🐾, also my most serious code reviewer while I build.</p>
+            <div className="cat-gallery" aria-label="my cats">
+              {cats.map((cat) => (
+                <figure key={cat.name} className="cat-card">
+                  <img src={cat.image} alt={cat.alt} className="cat-image" />
+                  <figcaption>
+                    <span className="cat-name">{cat.name}</span>
+                    <p>{cat.note}</p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </article>
         </section>
       );
