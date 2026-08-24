@@ -58,6 +58,16 @@ const experiences = [
     },
     tag: 'Cloud Native',
   },
+  {
+    title: 'AI Skill Development',
+    summary: 'Built an AI-driven debugging agent skill to analyze JSON payload diffs and API regressions, implementing heuristic filtering to isolate high-impact business changes from low-signal noise (e.g., trace IDs, timestamps).',
+    points: [
+      'Published and maintained the skill on ClawHub, achieving 640+ all-time downloads by users.',
+      'Developed heuristic filtering to separate meaningful business changes from noise.',
+    ],
+    link: { label: 'payload-diff-explainer', href: 'https://clawhub.ai/cheeseqi/skills/payload-diff-explainer' },
+    tag: 'Developer Tooling & Agent Skills',
+  },
 ];
 
 const tabs = [
