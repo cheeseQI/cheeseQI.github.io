@@ -142,15 +142,36 @@ a {
   border-bottom: 1px solid var(--border);
 }
 
-.identity::before {
+.identity-bar {
   position: absolute;
   top: -4px;
-  left: 0;
   width: 48px;
   height: 7px;
   background: var(--amber);
   box-shadow: 0 0 18px rgba(230, 168, 92, 0.7);
-  content: "";
+  transition: left 1s ease, background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.identity-bar--day {
+  background: var(--yellow);
+  box-shadow: 0 0 18px rgba(245, 230, 66, 0.7);
+  animation: pulse-bright 2s ease-in-out infinite;
+}
+
+.identity-bar--night {
+  background: var(--cyan);
+  box-shadow: 0 0 18px rgba(92, 225, 212, 0.7);
+  animation: pulse-dim 3s ease-in-out infinite;
+}
+
+@keyframes pulse-bright {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes pulse-dim {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.5; }
 }
 
 .sidebar-label,
@@ -158,7 +179,7 @@ a {
 .card-index {
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .sidebar-label {
@@ -196,7 +217,7 @@ a {
   max-width: 210px;
   margin: 15px 0 0;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.65;
 }
 
@@ -220,7 +241,7 @@ a {
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   transition: color 180ms ease, background 180ms ease, padding 180ms ease;
 }
@@ -255,7 +276,7 @@ a {
   color: #80928f;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .signal-dot {
@@ -270,6 +291,7 @@ a {
 .signal-code {
   grid-column: 2;
   color: #435956;
+  font-size: 13px;
 }
 
 .content-area {
@@ -454,7 +476,7 @@ a {
 .card p {
   margin: 0 0 16px;
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.85;
 }
 
@@ -466,13 +488,13 @@ a {
 }
 
 .chip {
-  padding: 7px 11px;
+  padding: 8px 14px;
   border: 1px solid rgba(92, 225, 212, 0.25);
   background: rgba(92, 225, 212, 0.05);
   color: #9cc7c1;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .cat-gallery {
@@ -605,12 +627,12 @@ a {
 
 .badge {
   flex: 0 0 auto;
-  padding: 6px 9px;
+  padding: 6px 12px;
   border: 1px solid rgba(230, 168, 92, 0.3);
   color: var(--amber);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 ul {
@@ -618,12 +640,12 @@ ul {
   padding: 0;
   color: #afbbb7;
   list-style: none;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 li {
   position: relative;
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   padding-left: 17px;
   line-height: 1.65;
 }
@@ -645,7 +667,7 @@ li::before {
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 2;
   transition: color 160ms ease, border-color 160ms ease, text-shadow 160ms ease;
 }
