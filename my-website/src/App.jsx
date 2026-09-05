@@ -1,5 +1,27 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './App.css';
+
+function useBellevueTime() {
+  const [time, setTime] = useState(() => getBellevueTime());
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(getBellevueTime()), 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return time;
+}
+
+function getBellevueTime() {
+  const now = new Date();
+  const options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit', hour12: false };
+  const timeStr = now.toLocaleTimeString('en-US', options);
+  const hour = parseInt(timeStr.split(':')[0], 10);
+  const minute = parseInt(timeStr.split(':')[1], 10);
+  const isNight = hour >= 19 || hour < 7;
+  const dayProgress = ((hour * 60 + minute) / 1440) * 100;
+  return { timeStr, isNight, dayProgress };
+}
 
 import myCatImage from './assets/mycat.jpg';
 import summerImage from './assets/summer.jpg';
@@ -92,6 +114,7 @@ const cats = [
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
+  const { timeStr, isNight, dayProgress } = useBellevueTime();
 
   const sectionContent = useMemo(() => {
     if (activeTab === 'about') {
@@ -166,7 +189,8 @@ function App() {
       </div>
       <aside className="sidebar">
         <div className="identity">
-          <p className="sidebar-label">Night Shift / Portfolio</p>
+          <div className={`identity-bar ${isNight ? 'identity-bar--night' : 'identity-bar--day'}`} style={{ left: `${dayProgress}%` }} />
+          <p className="sidebar-label">{isNight ? 'Night Shift' : 'Day Shift'} / Portfolio</p>
           <h1 data-text={profile.name}>{profile.name}</h1>
           <p className="sidebar-title">{profile.title}</p>
         </div>
@@ -186,7 +210,7 @@ function App() {
         <div className="signal" aria-label="system status online">
           <span className="signal-dot" />
           <span>Signal online</span>
-          <span className="signal-code">HKG / 02:17</span>
+          <span className="signal-code">BLV / {timeStr}</span>
         </div>
       </aside>
 
